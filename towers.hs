@@ -18,7 +18,8 @@ data TowersofHanoi = TowerList [Tower] Int
 data Tower = Tower [Int]
 
 instance Show TowersofHanoi where
-    show (TowerList tlist _) = "Tower 1:" ++ show (head tlist) ++ "\nTower 2:" ++ show (tlist !! 1) ++ "\nTower 3:" ++ show (tlist !! 2)
+    show (TowerList tlist _) = "Tower 1:" ++ show (head tlist) ++ "\nTower 2:"
+        ++ show (tlist !! 1) ++ "\nTower 3:" ++ show (tlist !! 2)
 
 -- Shows integers with constant spacing
 showInt :: Int -> String
