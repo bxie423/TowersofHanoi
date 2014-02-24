@@ -70,7 +70,7 @@ moveTowers (TowerList tlist n) from to = TowerList tlist' n where
 -- Since we start with everything on tower 1, only towers 2 and 3 count
 gameOver :: TowersofHanoi -> Bool
 gameOver (TowerList tlist n) = towerFinished (tlist !! 1) || towerFinished (tlist !! 2) where
-    towerFinished t = getTowerList t == [1..n]
+    towerFinished = (==) [1..n] . getTowerList
 
 -- ## Main execution
 
@@ -78,7 +78,12 @@ main :: IO ()
 main = do
     putStrLn "Welcome to Towers of Hanoi!\nHow many disks would you like to use?"
     lines <- getLine
-    playGame $ initializeTowers (read lines :: Int)
+    let num = strToInt lines
+    if isJust num then
+        playGame $ initializeTowers $ fromJust num
+    else do
+        putStrLn "Invalid input.  Please try again."
+        main
 
 playGame :: TowersofHanoi -> IO ()
 playGame towers =
